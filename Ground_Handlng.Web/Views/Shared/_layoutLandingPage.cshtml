@@ -1,0 +1,94 @@
+﻿<html style="height: auto;">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/AdminLTE/plugins/font-awesome/css/font-awesome.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    @*<link href="https://unpkg.com/ionicons@4.5.0/dist/css/ionicons.min.css" rel="stylesheet">*@
+
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/AdminLTE/dist/css/adminlte.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="~/css/custometcss.css" rel="stylesheet" />
+
+    <!-- jQuery -->
+    <script src="/AdminLTE/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+    <script src="/AdminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE/dist/js/adminlte.min.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+
+        });
+    </script>
+
+</head>
+
+
+<body class="sidebar-mini sidebar-collapse" style="height: auto;">
+    <!-- Site wrapper -->
+    <div class="wrapper">
+
+        <!-- Header Navbar -->
+        <!-- Header Navbar -->
+        <nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+            <!-- Left navbar links -->
+            <!-- SEARCH FORM -->
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <!-- Notifications Dropdown Menu -->
+
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container Left-->
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper" style="margin-left:0px !important">
+            @RenderBody()
+
+        </div>
+        <!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="float-right d-none d-sm-block">
+                <b>Version</b> 1.0.0
+            </div>
+            <strong>Copyright © 2018 <a href="http://www.psetse.gov.et/index.php">Ethiopian Airlines Enterprise</a>.</strong> All rights
+            reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+        <div id="sidebar-overlay"></div>
+    </div>
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+    <script src="/AdminLTE/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+    <script src="/AdminLTE/plugins/select2/select2.full.min.js"></script>
+    <script>
+
+        $(function () {
+            $('.select2').select2();
+        });
+
+        //bootstrap WYSIHTML5 - text editor
+        $('.textarea').wysihtml5()
+    </script>
+
+
+
+
+</body>
+</html>

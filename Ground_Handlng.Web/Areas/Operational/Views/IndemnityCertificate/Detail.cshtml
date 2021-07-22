@@ -1,0 +1,81 @@
+﻿
+@model Ground_Handlng.DataObjects.Models.Operational.Forms.IndemnityCertificate.IndemnityCertificate
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+
+}
+<link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/datepicker/datepicker3.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css" />
+<style type="text/css">
+
+    div#modal {
+        width: 100%;
+        z-index: 1100;
+    }
+
+    #modal .modal-dialog {
+        max-width: 80%;
+        z-index: 100000;
+    }
+
+    input.input-has-value {
+        color: red;
+    }
+    /* For standards browsers */
+    /*input[type="text"]:focus {
+            border: 1px solid #f00;
+        }*/
+
+    /* For Internet Explorer */
+    /*input.focus {
+            border: 1px solid #f00;
+        }*/
+    .error {
+        border: 2px solid red;
+    }
+</style>
+
+<section class="container">
+    <div class="card">
+        <div class="card-body">
+            <p>i hear by declare that i shall hold ETHIOPIAN AIRLINES responsible for any liabilitys that may arise as a result of my sickness while i travel by ETHIOPIAN </p>
+            <p>AIRLINES flight No.<b> <u>@Model.FlightNumber</u>  </b> from <b><u>@Model.From</u></b> to <b><u>@Model.To</u></b>. I hear by Release ETHIOPIAN AIRLINES from all liabilities in connection with my travel under this condition of my health.</p>
+            <div class="col-sm-5 float-right">
+                <div class="input-group row">
+                    <p class="control-label col-sm-7">Date</p>
+                    <div class="col-sm-5">
+                        <label class="control-label">@Model.Date.ToString("dd/MM/yyyy")</label>
+                    </div>
+                </div>
+                <div class="input-group row">
+                    <p class="control-label col-sm-7">Signed:</p>
+                    <div class="col-sm-5">
+                        <label class="control-label">@Model.PassangerSign</label>
+                    </div>
+                </div>
+                <div class="input-group row">
+                    <p class="control-label col-sm-7">Closest Relative/Guardian</p>
+                    <div class="col-sm-5">
+                        <label class="control-label">@Model.Guardian</label>
+                    </div>
+                </div>
+                <div class="input-group row">
+                    <p class="control-label col-sm-7">Full Address</p>
+                    <div class="col-sm-5">
+                        <label class="control-label">@Model.FullAddress</label>
+                    </div>
+                </div>
+                <div class="input-group row">
+                    <p class="control-label col-sm-7">Identity Card</p>
+                    <div class="col-sm-5">
+                        <label class="control-label">@Model.IdentityCard</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

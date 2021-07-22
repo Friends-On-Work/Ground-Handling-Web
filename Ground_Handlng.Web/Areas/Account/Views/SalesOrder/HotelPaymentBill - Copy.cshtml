@@ -1,0 +1,146 @@
+﻿@*@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Ground_Handlng.DataObjects.Models.Operational.SalesOrder
+
+<html>
+<head>
+    <style type="text/css">
+        #skyLightHotelLogo {
+            width: 20%;
+            height: 150px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+    <script type="text/javascript">
+
+
+    </script>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)
+
+        @if (ViewBag.Message != null)
+        {
+            <p style="color: red">@ViewBag.Message</p>
+        }
+        <div class="container body-content">
+           
+            <div class="invoice p-3 mb-3">
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-sm-12">                      
+                        <img id="skyLightHotelLogo" src="https://ethiopiancrewportal.azurewebsites.net/Images/SkyLight.jpg" /> 
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="row">
+                    <br /><br />
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <address>                             
+                            Customer Name : <strong>ET1234</strong><br>
+                            Paid Date :<strong>VAT123456</strong> <br />
+                            Bill No. : <strong>Afro</strong><br />
+                            Payment Method : <strong>Ethiopian Development Research Institute </strong><br />
+                            Amount :<strong>Group</strong> <br />
+                         </address>
+                    </div>
+
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <address>
+                            Room No. : <strong>ET1234</strong><br>
+                            Arrival :<strong>@DateTime.Now.ToString("dd-MM-yy / hh:mm")</strong> <br />
+                            Departure : <strong>@DateTime.Now.ToString("dd-MM-yy / hh:mm")-</strong><br />
+                            Conf. No. : <strong>12407</strong><br />
+                            Persons :<strong>1/0</strong> <br />
+                            Cashier :<strong>FORALPH</strong> <br />
+                            Page No. : <strong>1 of 2</strong><br />
+                            Folio No. : <strong>123456</strong><br />
+                            Print Date. : <strong>@DateTime.Now.ToString("dd-MMM-yy / hh:mm")</strong><br />
+                        </address>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-8 box-body table-responsive no-padding">
+
+                        <table id="tblSaleOrders" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.Raw("Date")
+                                    </th>
+                                    <th>
+                                        @Html.Raw("Description")
+                                    </th>
+                                    <th>
+                                        @Html.Raw("Reference")
+                                    </th>
+                                    <th>
+                                        @Html.Raw("Charges")
+                                    </th>
+                                    <th>
+                                        @Html.Raw("Credit")
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    if (Model != null && Model.HotelServices.Count() > 0)
+                                    {
+                                        foreach (var item in Model.HotelServices)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @item.ServiceUtilizationDate.ToString("dd-MM-yyyy")
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Description)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Reference)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.Amount)
+                                                </td>
+                                                <td>
+                                                    @if (item.Credit > 0)
+                                                    {
+                                                        @Html.DisplayFor(modelItem => item.Credit)
+                                                    }
+                                                </td>
+                                            </tr>
+                                        }
+                                                    }
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+                                    <br /><br /><br /><br /><br /><br /><br />
+                                    <div class="row align-bottom">
+                                        <div class="col-sm-8 col-md-8 col-lg-8">
+                                            <address>
+                                                <small> Address : Bole International Airport, Addis Ababa, Ethiopia</small><br>
+                                                <small> Tel :+251 116671090 Fax: +251116671070</small> <br />
+                                                <small>  Website : https://ethiopianskylighthotel.com</small><br />
+                                            </address>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+
+                    </body>
+                </html>*@

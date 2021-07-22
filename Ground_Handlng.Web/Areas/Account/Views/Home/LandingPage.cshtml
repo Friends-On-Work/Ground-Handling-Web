@@ -1,0 +1,231 @@
+﻿<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_layoutLandingPage.cshtml";
+}
+
+<script src="~/AdminLTE/dist/js/demo.js"></script>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Welcome to ET Ground Service</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Landing Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+
+    <!-- /.card -->
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Ground Service</h3>
+        </div>
+        <div class="card-body" style="background-color:#ececec;">
+
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <a href="@Url.Action("Index", "Home", new { area = "Account"})"> <span class="info-box-icon bg-primary"><i class="ion ion-ios-person-outline"></i></span></a>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text size-2">Account Management  </span>
+                            <span class="info-box-number"><small>Manage Use</small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "Manuals", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-plus-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Manuals</span>
+                            <span class="info-box-number"><small>Pay by Link </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "Bulletin", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Bulletin</span>
+                            <span class="info-box-number"><small>Bulletin and Notice </small></span>
+                        </div>
+                    </div>
+                </div>
+                @*<div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "PassangerAssistanceForm", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Passanger Assistance Form</span>
+                            <span class="info-box-number"><small> Passanger Assistance Form </small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "PregnancyCertificate", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Pregnancy Certificate</span>
+                            <span class="info-box-number"><small> Pregnancy Certificate </small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "WaiverFormForAcceptance", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Waiver Form For Acceptance</span>
+                            <span class="info-box-number"><small> Waiver Form For Acceptance </small></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "Illustration", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Illustration</span>
+                            <span class="info-box-number"><small> Illustration </small></span>
+                        </div>
+                    </div>
+                </div>*@
+                @*<div class="col-12 col-sm-6 col-md-3">
+            <div class="info-box mb-3">
+                <a href="@Url.Action("Index", "Recipient", new { area = "Voucher"})">
+                    <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                </a>
+                <div class="info-box-content">
+                    <span class="info-box-text center">Voucher</span>
+                    <span class="info-box-number"><small>Recipient Voucher </small></span>
+                </div>
+            </div>
+        </div>*@
+                <!-- /.col -->
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
+
+                <!-- /.col -->
+                @*<div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+
+                        <a href="#"><span class="info-box-icon bg-primary"><i class="ion ion-ios-pie-outline"></i></span></a>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Report</span>
+                            <span class="info-box-number"><small>Performance Report</small></span>
+                        </div>
+                    </div>
+                </div>*@
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "FeedbackRequests", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-contact-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Feedback</span>
+                            <span class="info-box-number"><small>Feedback Requests </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "CostSavingIdeaRequests", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-calculator-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Cost Saving</span>
+                            <span class="info-box-number"><small>Cost Saving Idea Request </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "FrequentlyAskedQuestions", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-email-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">FAQ</span>
+                            <span class="info-box-number"><small>Frequently Asked Questions </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "ManagementContacts", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-person-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Management Contacts</span>
+                            <span class="info-box-number"><small>Management Contacts </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "SliderViewItems", new { area = "Operational"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-paper-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">News</span>
+                            <span class="info-box-number"><small>News</small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+            </div>
+                    <!-- /.row -->
+
+                    <form asp-controller="Account" asp-action="Login" id="btnLoginForm" method="post" class="form-horizontal" role="form" asp-route-returnUrl="@ViewBag.ReturnUrl"></form>
+
+
+                </div>
+                <!-- /.card-body -->
+                <!-- /.card-footer-->
+            </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
+        <!-- /.content-wrapper -->

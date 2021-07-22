@@ -1,0 +1,30 @@
+﻿@model Ground_Handlng.DataObjects.Models.Operational.ManagementContact
+
+
+@using (Html.BeginForm("Upload", "ManagementContacts", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="panel panel-default col-lg-12">
+        <div class="panel-heading my-1">
+            Download a <a href="~/Content/UploadFileTemplate/Contact Info Upload sample file.csv">sample file</a> and compare it to your import file to ensure you have the exact csv file to upload.
+        </div>
+     
+        <div class="panel-body my-3">
+            <div class="col-6 my-3">
+                <label>
+                    <input type="file" class="form-control form-control-lg" accept="csv" name="files" data-val="true" placeholder="Upload Company Contacts">
+                </label>
+            </div>
+            <div class="col-submit my-1">
+                <button type="submit" value="Upload" id="upload-btn" class="btn btn-primary">Upload Contacts</button>
+            </div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+}
+
+<style>
+    .panel-default > .panel-heading {
+        font-size: 15px;
+    }
+</style>

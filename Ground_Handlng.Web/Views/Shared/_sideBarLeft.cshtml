@@ -1,0 +1,129 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject Ground_Handlng.Utilities.Utility.Menu menuBuilder
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="@Url.Action("LandingPage", "Home", new { area = "Finance"})" class="brand-link">
+        <img src="~/images/logo.png"
+             alt="ET Template Logo"
+             class="brand-image img-circle elevation-3"
+             style="opacity: .9">
+        <span class="brand-text font-weight-light">Ground Service</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="~/AdminLTE/dist/img/avatar5.PNG" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="#" class="d-block">@Context.User.Identity.Name</a>
+            </div>
+        </div>
+
+        <!-- Sidebar Menu -->
+
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column menu-open" data-widget="treeview" role="menu" data-accordion="false">
+                @{
+                    var menuString = menuBuilder.MenuBuilder(User.Identity.Name);
+                }
+                @Html.Raw(menuString);
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link active">
+                        <i class="nav-icon fa fa-gear"></i>
+                        <p>
+                            Master Data
+                            <i class="right fa fa-angle-left"></i>
+                        </p>
+                    </a>
+
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "BulletinNoticeType", new { area = "MasterData"})" class="nav-link">
+                                <i class="fa fa-user nav-icon"></i>
+                                <p>Bulletin Notice Type</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "BulletinFrom", new { area = "MasterData"})" class="nav-link">
+                                <i class="fa fa-key nav-icon"></i>
+                                <p>Bulletin From</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "BulletinTo", new { area = "MasterData"})" class="nav-link">
+                                <i class="fa fa-unlock nav-icon"></i>
+                                <p>Bulletin To</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("Index", "BulletinTypes", new { area = "MasterData"})" class="nav-link">
+                                <i class="fa fa-filter nav-icon"></i>
+                                <p>Bulletin Types</p>
+                            </a>
+                        </li>
+
+                        @*<li class="nav-item">
+                            <a href="@Url.Action("Index", "AccessLog", new { area = "MasterData"})" class="nav-link">
+                                <i class="fa fa-filter nav-icon"></i>
+                                <p>AccessLog</p>
+                            </a>
+                        </li>*@
+                    </ul>
+                </li>
+            </ul>
+            @*<ul class="nav nav-pills nav-sidebar flex-column menu-open" data-widget="treeview" role="menu" data-accordion="false">
+
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link active">
+                            <i class="nav-icon fa fa-gear"></i>
+                            <p>
+                                Account Management
+                                <i class="right fa fa-angle-left"></i>
+                            </p>
+                        </a>
+
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Account", new { area = "Account"})" class="nav-link">
+                                    <i class="fa fa-user nav-icon"></i>
+                                    <p>Accounts</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("ResetPassword", "Account", new { area = "Account"})" class="nav-link">
+                                    <i class="fa fa-key nav-icon"></i>
+                                    <p>Password Reset</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Roles", new { area = "Account"})" class="nav-link">
+                                    <i class="fa fa-unlock nav-icon"></i>
+                                    <p>Roles</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "Privileges", new { area = "Account"})" class="nav-link">
+                                    <i class="fa fa-filter nav-icon"></i>
+                                    <p>Previleges</p>
+                                </a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a href="@Url.Action("Index", "AccessLog", new { area = "Account"})" class="nav-link">
+                                    <i class="fa fa-filter nav-icon"></i>
+                                    <p>AccessLog</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                </ul>*@
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

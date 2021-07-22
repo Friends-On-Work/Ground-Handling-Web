@@ -1,0 +1,109 @@
+﻿@model Ground_Handlng.DataObjects.Models.Operational.Bulletin.Bulletin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <div style="color:darkgreen">@Html.ActionLink("Back to List", "Index")</div>
+                </div>
+                <div class="row box-body">
+                    <div class="col-lg-12">
+                        <div class="box-header with-border">
+                            <h3 class="box-title"><i class="fa fa-newspaper-o text-primary"></i>BULLETIN/NEWS DETAILS</h3>
+                        </div>
+                        <div class="box box-primary">
+                            <div class="col-md-4">
+                                <div class="box-body">
+                                    <dl class="dl-horizontal">
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.NoticeNumber)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.NoticeNumber)
+                                        </dd>
+
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.Date)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Date)
+                                        </dd>
+
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.NoticeTo)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.NoticeTo)
+                                        </dd>
+
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.Subject)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Subject)
+                                        </dd>
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.Remark)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Remark)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="box-body">
+                                    <dl class="dl-horizontal">
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.Type)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.Type)
+                                        </dd>
+
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.SentBy)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.SentBy)
+                                        </dd>
+
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.BulletinUrl)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.BulletinUrl)
+                                        </dd>
+
+                                        <dt style="text-align:left">
+                                            @Html.DisplayNameFor(model => model.ExpirationDate)
+                                        </dt>
+
+                                        <dd>
+                                            @Html.DisplayFor(model => model.ExpirationDate)
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</section>

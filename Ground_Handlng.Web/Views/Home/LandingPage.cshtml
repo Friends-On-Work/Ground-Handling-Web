@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_layoutLandingPage.cshtml";
+}
+
+<script src="~/AdminLTE/dist/js/demo.js"></script>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Welcome to ET SkyLight Hotel</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item active">Landing Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+
+
+    <!-- /.card -->
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">SkyLight Modules</h3>
+        </div>
+        <div class="card-body" style="background-color:#ececec;">
+
+            <!-- Info boxes -->
+            <div class="row">
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box">
+                        <a href="~/Home/Index"> <span class="info-box-icon bg-primary"><i class="ion ion-ios-person-outline"></i></span></a>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text size-2">Account Management  </span>
+                            <span class="info-box-number"><small>Manage Use</small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "SalesOrderDashboard", new { area = "SalesOrder"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-plus-outline"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Sales Order</span>
+                            <span class="info-box-number"><small>Pay by Link </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "Dashboard", new { area = "Reservation"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Reservation</span>
+                            <span class="info-box-number"><small>Hotel Booking </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+                        <a href="@Url.Action("Index", "Recipient", new { area = "Voucher"})">
+                            <span class="info-box-icon bg-primary"><i class="ion ion-ios-home"></i></span>
+                        </a>
+                        <div class="info-box-content">
+                            <span class="info-box-text center">Voucher</span>
+                            <span class="info-box-number"><small>Recipient Voucher </small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+
+
+                <!-- /.col -->
+                <!-- fix for small devices only -->
+                <div class="clearfix hidden-md-up"></div>
+
+                @*<div class="col-12 col-sm-6 col-md-3">
+           <div class="info-box mb-3">
+               <a href="@Url.Action("Index", "DashboardEvaluation", new { area = "BSC"})">
+                   <span class="info-box-icon bg-primary"><i class="ion ion-ios-paper-outline"></i></span>
+               </a>
+
+               <div class="info-box-content">
+                   <span class="info-box-text">Evaluation</span>
+                   <span class="info-box-number"><small>Evaluat employees </small></span>
+               </div>
+            </div>
+        </div>*@
+
+                <!-- /.col -->
+                <div class="col-12 col-sm-6 col-md-3">
+                    <div class="info-box mb-3">
+
+                        <a href="#"><span class="info-box-icon bg-primary"><i class="ion ion-ios-pie-outline"></i></span></a>
+
+                        <div class="info-box-content">
+                            <span class="info-box-text">Report</span>
+                            <span class="info-box-number"><small>Performance Report</small></span>
+                        </div>
+                        <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+
+            </div>
+            <!-- /.row -->
+
+            <form asp-controller="Account" asp-action="Login" id="btnLoginForm" method="post" class="form-horizontal" role="form" asp-route-returnUrl="@ViewBag.ReturnUrl"></form>
+
+
+        </div>
+        <!-- /.card-body -->
+        <!-- /.card-footer-->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->
+<!-- /.content-wrapper -->

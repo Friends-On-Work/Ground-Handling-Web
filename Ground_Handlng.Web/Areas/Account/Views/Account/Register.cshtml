@@ -1,0 +1,290 @@
+﻿@model Ground_Handlng.DataObjects.ViewModel.Identity.RegisterViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewBag.Title = "Register";
+    ViewBag.Name = "Account Registration";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+@**@
+<!-- select2 -->
+<link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css">
+<link rel="stylesheet" href="~/AdminLTE/plugins/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/AdminLTE/plugins/select2/select2.css">
+@**@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Create Account</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home", new { area = "Account"})"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Account", new { area = "Account"})"><i class="fa fa-unlock"></i> Accounts</a></li>
+                    <li class="breadcrumb-item active">Create account</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <a class="box-title" href="@Url.Action("Index", "Account", new { area = "Account"})"><i class="fa fa-user text-primary"></i>  Back to List</a>
+            </h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @using (Html.BeginForm(FormMethod.Post, new { @class = "form-horizontal", @id = "validate", @enctype = "multipart/form-data", @role = "form" }))
+            {
+                @*<form asp-area="Operational" asp-controller="Manuals" asp-action="Create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form" id="validate">*@
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <div class="form-group-sm">
+                    @Html.LabelFor(m => m.FullName, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-4">
+                        @*@Html.TextBoxFor(m => m.FullName, new { @class = "form-control" })*@
+                        <input type="text" for="FullName" class="form-control" name="fullname" />
+                    </div>
+                    <span for="FullName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-sm">
+                    @Html.LabelFor(m => m.Role, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-4">
+                        @*@Html.DropDownList("Role", (SelectList)ViewBag.Roles, new { @id = "Role", @name = "Role", @class = "form-control select2", multiple = "multiple", style = "width: 100%;" })*@
+                        <select for="Role" class="form-control required" asp-items="ViewBag.Roles" name="role">
+                            <option></option>
+                        </select>
+                    </div>
+                    <span for="Role" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-sm">
+                    @Html.LabelFor(m => m.Username, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-4">
+                        <input for="Username" class="form-control required" name="username" />
+                        @*@Html.TextBoxFor(m => m.Username, new { @class = "form-control" })*@
+                    </div>
+                    <span for="Username" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-sm">
+                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                    <div class="col-md-4">
+                        @*@Html.TextBoxFor(m => m.Email, new { @class = "form-control" })*@
+                        <input for="Email" class="form-control required" name="email" />
+                    </div>
+                    <span for="Email" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-sm">
+                    <label asp-for="Password" class="control-label col-md-2"></label>
+                    @*@Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })*@
+                    <div class="col-md-4">
+                        @*@Html.PasswordFor(m => m.Password, new { @class = "form-control", autocomplete = "off" })*@
+                        <input type="password" for="Password" class="form-control required" name="password" id="password" autocomplete="off" />
+                    </div>
+                    <span for="Password" class="text-danger"></span>
+                </div>
+
+                <div class="form-group-sm">
+                    <label asp-for="ConfirmPassword" class="control-label col-md-2"></label>
+                    <div class="col-md-4">
+                        <input type="password" for="ConfirmPassword" class="form-control required" name="confirmpassword" autocomplete="off" />
+                        @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autocomplete = "off" })*@
+                    </div>
+                    <span for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group-sm">
+                    <label asp-for="Address" class="control-label col-md-2"></label>
+                    @*@Html.LabelFor(m => m.Address, new { @class = "col-md-2 control-label" })*@
+                    <div class="col-md-4">
+                        <input type="text" for="Address" class="form-control required" name="address" />
+                        @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autocomplete = "off" })*@
+                    </div>
+                    <span for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <div class="form-group-sm">
+                    <label asp-for="Position" class="control-label col-md-2"></label>
+                    @*@Html.LabelFor(m => m.Position, new { @class = "col-md-2 control-label" })*@
+                    <div class="col-md-4">
+                        <input type="text" for="Position" class="form-control required" name="position" />
+                        @*@Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control", autocomplete = "off" })*@
+                    </div>
+                    <span for="ConfirmPassword" class="text-danger"></span>
+                </div>
+                <br />
+                <div class="form-group-sm">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+@**@
+<script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/AdminLTE/plugins/select2/select2.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var $AddDropDownRole = $("#Role").select2({
+            maximumSelectionSize: 6
+        });
+        $('.select2').select2();
+        
+    });
+    $(function () {
+        //$.validator.setDefaults({
+        //    submitHandler: function () {
+        //        debugger;
+        //        $('#general-error').hide();
+        //        $('#errors').empty();
+        //        var formData = new FormData();
+        //        var other_data = $('#validate').serializeArray();
+        //        $.each(other_data, function (key, input) {
+        //            formData.append(input.name, input.value);
+        //        });
+        //        $.ajax({
+        //            url: '/Account/Account/Register',
+        //            type: 'POST',
+        //            data: formData,
+        //            processData: false,
+        //            contentType: false,
+        //            cache: false,
+        //            success: function (data) {
+        //                debugger;
+        //                if (data.status == "3" || data.status == "4" || data.status == "5") {
+        //                    if (data.status == "3") {
+        //                        swal({
+        //                            type: 'success',
+        //                            title: data.message,
+        //                            showConfirmButton: false,
+        //                            timer: 3000
+        //                        }).then(() => { window.location = "/Account/Account/Index"; });;
+        //                        $('#modal').modal('hide');
+        //                    }
+        //                    else {
+        //                        swal({
+        //                            type: 'error',
+        //                            title: data.message,
+        //                            showConfirmButton: false,
+        //                            timer: 3000
+        //                        });
+        //                    }
+        //                }
+        //            },
+        //            error: function (datd) {
+        //                window.location = "/Account/Account/Index";
+        //                swal({
+        //                    type: 'error',
+        //                    title: data.message,
+        //                    showConfirmButton: false,
+        //                    timer: 3000
+        //                });
+
+        //            }
+
+        //        });
+        //    }
+        //});
+        $('#validate').validate({
+            ignore: [],
+            errorPlacement: function () { },
+            rules: {
+                username: {
+                    required: true,
+                    number:true,
+                },
+                fullname: {
+                    required: true
+                },
+                role: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                password: {
+                    required: true
+                },
+                confirmpassword: {
+                    required: true,
+                    equalTo: "#password"
+                },
+                address: {
+                    required: true,
+                },
+                position: {
+                    required: true,
+                },
+            },
+            messages: {
+                username: {
+                    required: "Please enter a User Name",
+                    number: "Please Add Employee ID"
+                },
+                fullname: {
+                    required: "Please provide Full Name",
+                },
+                role: {
+                    required: "Please Select Role"
+                },
+                email: {
+                    required: "Please provide an Email",
+                    email: "Please provide a Correct Email Address",
+                },
+                password: {
+                    required: "Please enter a Password"
+                },
+                confirmpassword: {
+                    required: "Please provide Confirm Password",
+                    equalTo: "Password and Confirm Password is not the same"
+                },
+                address: {
+                    required: "Please provide Address",
+                    //extension: "Please upload valid file formats"
+                },
+                position: {
+                    required: "Please provide Position",
+                    //extension: "Please upload valid file formats"
+                },
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group-sm').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+
+        });
+
+    });
+</script>

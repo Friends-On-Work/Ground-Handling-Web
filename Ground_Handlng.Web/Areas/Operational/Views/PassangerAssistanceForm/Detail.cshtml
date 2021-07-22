@@ -1,0 +1,478 @@
+﻿@model Ground_Handlng.DataObjects.Models.Operational.Forms.PassangerAssistanceForm.PassangerAssistanceForm
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+
+}
+<link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/datepicker/datepicker3.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css" />
+<style>
+    input.error {
+        border-color: #f00 !important;
+    }
+
+    small.required {
+        color: #f00;
+    }
+</style>
+<style rel="stylesheet">
+    #loading {
+        color: #007bff;
+        text-shadow: 1px 1px 1px #ccc;
+    }
+</style>
+<style type="text/css">
+
+    div#modal {
+        width: 100%;
+        z-index: 1100;
+    }
+
+    #modal .modal-dialog {
+        max-width: 80%;
+        z-index: 100000;
+    }
+
+    input.input-has-value {
+        color: red;
+    }
+    /* For standards browsers */
+    /*input[type="text"]:focus {
+            border: 1px solid #f00;
+        }*/
+
+    /* For Internet Explorer */
+    /*input.focus {
+            border: 1px solid #f00;
+        }*/
+    .error {
+        border: 2px solid red;
+    }
+</style>
+
+<section class="content">
+    <div class="card">
+        <div class="card-header center">
+            Information Sheet For Passangers Requiring Special Assistance
+            (Sales Office)
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-5 float-left">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="input-group row">
+                                <p class="col-sm-7">1. Name</p>
+                                <div class="col-sm-5">
+                                    <label class="control-label">@Model.Title @Model.FullName</label>
+                                </div>
+                            </div>
+                            <div class="input-group row">
+                                <p class="col-sm-7">2. PNR</p>
+                                <div class="col-sm-5">
+                                    <label class="control-label">@Model.PNR</label>
+                                </div>
+                            </div>
+                            @{
+                                if (Model.ProposedIternaryId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="col-sm-7">3. Proposed Iternary</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes &nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="col-sm-7">Airline(s)</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.ProposedIternary.Airlines</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="col-sm-7">Flight Number(s)</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.ProposedIternary.FlightNumber </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="col-sm-7">Flight Date(s)</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.ProposedIternary.FlightDate</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="col-sm-7">Class(s)</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.ProposedIternary.Class</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Sigment(s)</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.ProposedIternary.Destination @Model.ProposedIternary.Orgin</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5 float-right">
+                    <div class="card">
+                        <div class="card-body">
+                            @{
+                                if (Model.AmbulanceId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">8. Ambulance</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes &nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Ambulance Destination Address</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.Ambulance.Address </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                else
+                                {
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Ambulance Company Contact</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.Ambulance.AmbulanceCompanyContact </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                if (Model.MeetAndAssistId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">9. Designeted Person Contact</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes &nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Designeted Person Name</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.MeetAndAssist.Name </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Designeted Person Contact</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.MeetAndAssist.Contact </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                       
+                                        }
+                                        }
+                                    </div>
+                                </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-sm-5 float-left">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="input-group row">
+                                <p class="control-label col-sm-7">4. Nature Of Disability</p>
+                                <div class="col-sm-5">
+                                    <label class="control-label">@Model.NatureOfDisablity </label>
+                                </div>
+                            </div>
+                            <div class="input-group row">
+                                <p class="control-label col-sm-7">5. Streacher Needed On Board</p>
+                                <div class="col-sm-5">
+                                    @{
+                                        var yes = "Yes";
+                                        var no = "No";
+                                        if (Model.StreacherNeeded)
+                                        {
+                                            <input class="control-label" type="checkbox" checked disabled placeholder="Yes" />@yes <text>&nbsp;</text>
+                                            <input class="control-label" type="checkbox" disabled placeholder="No" /> @no
+                                        }
+                                        else
+                                        {
+                                            <input class="control-label" type="checkbox" disabled value="Yes" />
+                                            <input class="control-label" type="checkbox" checked disabled value="No" />
+                                        }
+                                    }
+                                </div>
+                            </div>
+                            @{
+                                if (Model.IntendedEscortsId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">6. Intende Escort</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes &nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Name</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.IntendedEscorts.Name </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Title</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.IntendedEscorts.Title</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Age</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.IntendedEscorts.Age</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">PNR</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.IntendedEscorts.PNR</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Medical Qualification</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.IntendedEscorts.MedicalQualification</label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Language Spoken</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.IntendedEscorts.LanguageSpoken</label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                            }
+                            @{
+                                if (Model.WheelChairNeededsId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">7. Wheel Chair Needed</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes &nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Wheel Chair Catagory</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.WheelChairNeededs.WheelChairCatagory </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Own Wheel Chair</p>
+                                            <div class="col-sm-5">
+                                                @{
+                                                    if (Model.WheelChairNeededs.OwnWheelChair)
+                                                    {
+                                                        <input class="control-label" type="checkbox" checked disabled placeholder="Yes" />@yes<text>&nbsp;</text>
+                                                        <input class="control-label" type="checkbox" disabled placeholder="No" /> @no
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="control-label" type="checkbox" disabled value="Yes" />@yes<text>&nbsp;</text>
+                                                        <input class="control-label" type="checkbox" checked disabled value="No" />@no
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Collapsaible WCOB</p>
+                                            <div class="col-sm-5">
+                                                @{
+                                                    if (Model.WheelChairNeededs.CollapsaibleWCOB)
+                                                    {
+                                                        <input class="control-label" type="checkbox" checked disabled placeholder="Yes" />@yes<text>&nbsp;</text>
+                                                        <input class="control-label" type="checkbox" disabled placeholder="No" /> @no
+                                                    }
+                                                    else
+                                                    {
+                                                        <input class="control-label" type="checkbox" disabled value="Yes" />@yes<text>&nbsp;</text>
+                                                        <input class="control-label" type="checkbox" checked disabled value="No" />@no
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Wheel Chair Type</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.WheelChairNeededs.WheelChairType </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                       
+                                        }
+                                        }
+                                    </div>
+                                </div>
+                </div>
+                <div class="col-sm-5 float-right">
+                    <div class="card">
+                        <div class="card-body">
+
+                            @{
+
+                                if (Model.OtherGroundArrangmentId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">10. Other Ground Arrangments Needed</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes&nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Specify</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label"> @Model.OtherGroundArrangment.Remark  </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Depature Airport</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label"> @Model.OtherGroundArrangment.DepatureAirport  </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Transit Airport</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.OtherGroundArrangment.TransitAirport </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Arrival Airport</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.OtherGroundArrangment.ArrivalAirport </label>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                }
+                                if (Model.SpecialInflightNeedId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">11. Special Inflight Arrangments Needed</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes&nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Type Of Arrangments</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.SpecialInflightNeed.TypeOfArrangment </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Specific Equipment</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.SpecialInflightNeed.Equipment </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Specify Arranging Company and at whose expense</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.SpecialInflightNeed.ArrangingCompanyName </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   
+                                }
+                                if (Model.FrequentTravelerMedicalCardId != null)
+                                {
+                                    <div class="input-group row">
+                                        <p class="control-label col-sm-7">12. Frequent Traveler Medical Card (FREMEC)</p>
+                                        <div class="col-sm-5">
+                                            <input class="control-label" type="checkbox" checked disabled />Yes&nbsp;
+                                            <input class="control-label" type="checkbox" disabled />No
+                                        </div>
+                                    </div>
+                                    <div class="box" style="padding-left: 15px;">
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">FREMEC Number</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.FrequentTravelerMedicalCard.FrequentTravelerCardNumber </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Issued By</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.FrequentTravelerMedicalCard.IssuedBy </label>
+                                            </div>
+                                        </div>
+                                        <div class="input-group row">
+                                            <p class="control-label col-sm-7">Expire Date</p>
+                                            <div class="col-sm-5">
+                                                <label class="control-label">@Model.FrequentTravelerMedicalCard.ExpireDate.ToString("dd/MM/yyyy") </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                }
+                            }
+                        </div>
+                                </div>
+                </div>
+            </div>
+  
+
+                
+
+                @*<div class="input-group">
+                <label class="control-label col-sm-3">1.Name</label>
+                <div class="col-sm-5">
+                    <label class="control-label">@Model.Title </label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="control-label col-sm-3">1.Name</label>
+                <div class="col-sm-5">
+                    <label class="control-label">@Model.Title </label>
+                </div>
+            </div>
+            <div class="input-group">
+                <label class="control-label col-sm-3">1.Name</label>
+                <div class="col-sm-5">
+                    <label class="control-label">@Model.Title </label>
+                </div>
+            </div>*@
+            </div>
+        </div>
+</section>
+<script src="~/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<script type="text/javascript">
+    $('input').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        radioClass: 'iradio_square-blue',
+        increaseArea: '20%' // optional
+    });
+</script>

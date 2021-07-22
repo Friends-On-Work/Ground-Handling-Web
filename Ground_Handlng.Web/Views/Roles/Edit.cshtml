@@ -1,0 +1,117 @@
+﻿@model Ground_Handlng.DataObjects.ViewModel.Identity.RoleViewModel
+
+@{
+    ViewBag.Title = "Edit Role";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+@**@
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css">
+@**@
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Edit Role</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="/Home/Index"><i class="fa fa-home"></i> Home</a></li>
+                    <li class="breadcrumb-item"><a href="/Roles/Index"><i class="fa fa-unlock"></i> Roles</a></li>
+                    <li class="breadcrumb-item active"><i class="fa fa-edit"></i> Edit Role</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+<section class="content">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">
+                <a class="box-title" href="/Roles/Index"><i class="fa fa-user text-primary"></i>  Back to List</a>
+            </h3>
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+        <div class="card-body">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <div class="box-body form-horizontal">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.RoleName, new { @class = "control-label col-md-2" })
+                        @Html.DisplayFor(model => model.RoleName, new { @class = "control-label col-md-10" })
+                        @Html.HiddenFor(model => model.RoleName, null)
+                    </div>
+
+                    <div class="form-group-sm">
+                        @Html.LabelFor(m => m.Description, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-4">
+                            @Html.TextBoxFor(m => m.Description, new { @class = "form-control" })
+                        </div>
+                    </div>
+            <br/>
+
+                    @Html.Label(null, "Privileges", new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @foreach (var p in ViewBag.Privileges)
+                        {
+                            <div class="checkbox col-md-3">
+                                @if (ViewBag.Selected.ToString().Contains(p.Id))
+                                {
+                                    <input type="checkbox" name="privilege" value="@p.Id" checked />
+                                }
+                                else
+                                {
+                                    <input type="checkbox" name="privilege" value="@p.Id" />
+                                }
+                                @Html.Label(null, (string)p.Action, new { @for = (string)p.Id })
+                            </div>
+                        }
+                    </div>
+
+                </div><!-- /.box-body -->
+                <br />
+                <div class="form-group-sm">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Save</button>
+                    </div>
+                </div>
+            }
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+
+@**@
+
+    <!-- Check -->
+    <script src="~/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+    <!-- FastClick -->
+    <script>
+        $(function () {
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            })
+        })
+    </script>
+@**@
+
+

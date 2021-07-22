@@ -1,0 +1,102 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@model Ground_Handlng.DataObjects.Models.Operational.SalesOrder
+
+<html>
+<head>
+    <style type="text/css">
+        #skyLightHotelLogo {
+            width: 30%;
+            height: 200px;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+          asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+          asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+
+    <script type="text/javascript">
+
+
+    </script>
+</head>
+<body>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true)
+
+        @if (ViewBag.Message != null)
+        {
+            <p style="color: red">@ViewBag.Message</p>
+        }
+        <div class="container body-content">
+            @*<div class="row col-sm-6">
+                 <div class="col-sm-8 d-inline float-left"> <img src="file:///E:/Work%20Related/Project/ETholiday/Code/ETHolidaysPackageProjects/wwwroot/images/ET%20Holidays%20Logo.jpg" width="200px" height="50px" /> </div>
+                </div>*@
+            <div class="invoice p-3 mb-3">
+                <br /><br />
+                <!-- title row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        @*<img id="skyLightHotelLogo" src="http://funkyimg.com/i/2PgWr.jpg" />*@
+                        @*<img id="skyLightHotelLogo" src="~/images/SkyLight.jpg" />*@
+                        <img id="skyLightHotelLogo" class="image img-fluid img-responsive" style="max-width: 100%;height: auto;" src="https://ethiopiancrewportal.azurewebsites.net/Images/SkyLight.jpg" />
+
+                        @*<h4>
+                                <i class="fa fa-globe"></i> ET-SkyLight, Ethiopian Airlines <br />
+                                <small class="float-right">Date :  @DateTime.Now.ToString("dd/MM/yy")</small>
+                            </h4>*@
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+                <div class="row">
+                    <br /><br /><br /><br />
+                    <div class="col-sm-5 col-md-5 col-lg-5">
+                        <address>
+                            <span style="font-size:medium;display: inline-block;margin-bottom:10px!important">Customer Name :  <strong>@Model.FullName</strong></span><br>
+                        </address>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <br /><br /><br /><br />
+                    <div class="col-sm-5 col-md-5 col-lg-5 col-lg-offset-2">
+                        <address>
+                            <span style="font-size:medium;display: inline-block;margin-bottom:10px!important">Paid Date :  <strong>@Model.PaidTime.ToString("dd MMM,yyyy")</strong></span> <br />
+                            <span style="font-size:medium;display: inline-block;margin-bottom:10px!important">Bill No. :  <strong>@Model.OrderCode</strong></span><br />
+                            <span style="font-size:medium;display: inline-block;margin-bottom:10px!important"> Payment Method :  <strong>@Model.PaymentMethod - @Model.CardNumber </strong></span><br />
+                            <span style="font-size:medium;display: inline-block;margin-bottom:10px!important">Amount :  <strong>@string.Format("{0} {1:n}", @Model.Currency.Code, @Model.Amount)</strong></span> <br />
+                        </address>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <br /><br /><br /><br /><br /><br /><br />
+                    <div class="col-lg-push-4 col-md-7 col-lg-7">
+                        <address>
+                            <span style="font-size:medium;padding-bottom:100px!important;">  Customer Signature : <strong>__________________________________</strong></span><br>
+                        </address>
+                    </div>
+                </div>
+
+                <br /><br /><br /><br /><br /><br /><br />
+                <br /><br /><br /><br /><br />
+                 <div class="row align-bottom">
+                    <div class="col-sm-8 col-md-8 col-lg-8">
+                        <address>
+                            <small> Address : Bole International Airport, Addis Ababa, Ethiopia</small><br>
+                            <small> Tel :+251 116671090 Fax: +251116671070</small> <br />
+                            <small>  Website : https://ethiopianskylighthotel.com</small><br />
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+</body>
+</html>

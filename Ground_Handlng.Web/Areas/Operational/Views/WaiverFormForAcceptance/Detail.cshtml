@@ -1,0 +1,57 @@
+﻿
+@model Ground_Handlng.DataObjects.Models.Operational.Forms.WaiverFormForAcceptance.WaiverFormForAcceptance
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+
+}
+<link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/datepicker/datepicker3.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css" />
+<style type="text/css">
+
+    div#modal {
+        width: 100%;
+        z-index: 1100;
+    }
+
+    #modal .modal-dialog {
+        max-width: 80%;
+        z-index: 100000;
+    }
+
+    input.input-has-value {
+        color: red;
+    }
+    /* For standards browsers */
+    /*input[type="text"]:focus {
+            border: 1px solid #f00;
+        }*/
+
+    /* For Internet Explorer */
+    /*input.focus {
+            border: 1px solid #f00;
+        }*/
+    .error {
+        border: 2px solid red;
+    }
+</style>
+
+<section class="container">
+    <div class="card">
+        <div class="card-body">
+            <p>I/We, the undersigned, hereby release Ethiopian Airlines from any liability in case my/our </p>
+            <p>PET/AVI is harmed due to the unfortunate event of disproportionate temperature and/or the  </p>
+            <p>discharge of halon gas upon carriage in cargo compartment of Q-400 aircraft. </p>
+            <br />
+            <p>Date <b><u>@Model.DateOfTravel</u></b> </p>
+            <p>Number of PET/AVI <b><u>@Model.NumberPETAVI</u></b></p>
+            <p>Type of PET/AVI <b><u>@Model.TypePETAVI</u></b></p>
+            <p>Bag Tag Number <b><u>@Model.BagTagNumber</u></b></p>
+            <p>Passenger Name  <b><u>@Model.FullName</u></b></p>
+            <p>Signature <b><u>@Model.SignatureOfPassenger</u></b></p>
+        </div>
+    </div>
+</section>
+

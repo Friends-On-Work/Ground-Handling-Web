@@ -1,0 +1,187 @@
+﻿@model Ground_Handlng.DataObjects.Models.Operational.FeedbackRequest
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+
+}
+<link rel="stylesheet" href="~/AdminLTE/dist/css/adminlte.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/bootstrap/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/datepicker/datepicker3.css" />
+
+<style>
+    input.error {
+        border-color: #f00 !important;
+    }
+
+    small.required {
+        color: #f00;
+    }
+</style>
+
+<section class="content">
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm(FormMethod.Post, new { @class = "form-horizontal", @id = "validate", @enctype = "multipart/form-data", @role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="callout callout-danger error-box-holder" id="general-error" style="display:none">
+                    <h4> Please correct the following errors and sumbit again </h4>
+                    <ul id="errors" class="error-box"></ul>
+                </div>
+                <div class="form-group">
+                    <label asp-for="EmployeeId" class="control-label col-md-3"></label>
+                    <div class="col-sm-7">
+                        <input for="EmployeeId" class="form-control required" name="EmployeeId" />
+                    </div>
+                    <span for="EmployeeId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Type" class="control-label col-md-3"></label>
+                    <div class="col-sm-7">
+                        <input for="Type" class="form-control required" name="Type" />
+                    </div>
+                    <span for="Type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label col-md-3"></label>
+                    <div class="col-sm-7">
+                        <textarea for="Description" class="form-control required" name="Description" rows="3"></textarea>
+
+                    </div>
+                    <span for="Description" class="text-danger"></span>
+                </div>
+
+
+
+
+
+
+                <br />
+                <div class="form-group col-md-3">
+                    <button type="submit" class="btn btn-success btn-block"> Save </button>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<script src="~/AdminLTE/plugins/datepicker/bootstrap-datepicker.js"></script>
+<script src="~/AdminLTE/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+             $.validator.setDefaults({
+                 submitHandler: function () {
+                    $('#general-error').hide();
+                     $('#errors').empty();
+                     var formData = new FormData();
+                     formData.append('url', $('#url')[0].files[0]);
+                     var other_data = $('#validate').serializeArray();
+                     $.each(other_data, function (key, input) {
+                         formData.append(input.name, input.value);
+                     });
+                     $.ajax({
+                         url: '/Operational/FeedbackRequests/Create',
+                         type: 'POST',
+                         data: formData,
+                         processData: false,
+                         contentType: false,
+                         cache: false,
+                         success: function (data) {
+                             debugger;
+                             if (data.status == "3" || data.status == "4" || data.status == "5") {
+                                 if (data.status == "3") {
+                                     swal({
+                                         type: 'success',
+                                         title: data.message,
+                                         showConfirmButton: false,
+                                         timer: 3000
+                                     }).then(() => { window.location = "/Operational/FeedbackRequests/Index"; });;
+                                     $('#modal').modal('hide');
+                                 }
+                                 else {
+                                     swal({
+                                         type: 'error',
+                                         title: data.message,
+                                         showConfirmButton: false,
+                                         timer: 3000
+                                     });
+                                 }
+                             }
+                         },
+                         error: function (data) {
+                             window.location = "/Operational/FeedbackRequests/Index";
+                             swal({
+                                 type: 'error',
+                                 title: data.message,
+                                 showConfirmButton: false,
+                                 timer: 3000
+                             });
+
+                         }
+
+                     });
+                }
+            });
+        $('#validate').validate({
+            ignore: [],
+            errorPlacement: function () { },
+            invalidHandler: function () {
+                setTimeout(function () {
+                    $('.nav-tabs a small.required').remove();
+                    var validatePane = $('.tab-content.tab-validate .tab-pane:has(input.error)').each(function () {
+                        debugger;
+                        var id = $(this).attr('id');
+                        $('.nav-tabs').find('a[href^="#' + id + '"]').append('<small class="required">***</small>');
+                    });
+                });
+            },
+            rules: {
+                EmployeeId: {
+                    required: true
+                },
+                Type: {
+                    required: true
+                },
+
+                Description: {
+                    required: true
+                },
+      
+            },
+            messages: {
+                EmployeeId: {
+                    required: "Please enter Employee Id",
+                },
+                Type: {
+                    required: "Please enter type",
+                },
+                Description: {
+                    required: "Please enter a Description"
+                },
+
+            },
+            errorElement: 'span',
+            errorPlacement: function (error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.form-group').append(error);
+            },
+            highlight: function (element, errorClass, validClass) {
+                $(element).addClass('is-invalid');
+            },
+            unhighlight: function (element, errorClass, validClass) {
+                $(element).removeClass('is-invalid');
+            }
+
+        });
+
+
+    });
+</script>
+
+

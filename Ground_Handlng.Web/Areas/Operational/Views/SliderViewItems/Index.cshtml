@@ -1,0 +1,242 @@
+﻿@model IEnumerable<Ground_Handlng.DataObjects.Models.Operational.SliderViewItem>
+
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+
+<link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css">
+<link href="~/AdminLTE/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/AdminLTE/plugins/datatables/extensions/Buttons/css/buttons.dataTables.min.css">
+<link href="~/AdminLTE/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet" />
+<link href="~/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
+
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-10">
+                <h1> News </h1>
+            </div>
+
+            <div class="col-sm-10" style="margin-top:2%">
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="content">
+    Default box
+    <div class="card">
+        <div class="card-header">
+
+            <h3 class="card-title">
+                <a class="box-title mr-4" href="#" id="create_new"> <i class="fa fa-plus text-primary"></i> Create News </a>
+            </h3>
+
+
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fa fa-minus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="box-body table-responsive no-padding">
+                <table id="news" class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>News Posted By</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Image</th>
+                            <th>URL</th>
+                            <th>Expires Date</th>
+                            <th>Posted Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (var item in Model)
+                            {
+                                <tr class="odd" role="row" id="@item.Id">
+                                    <td> @Html.DisplayFor(modelItem => item.CreatedBy)</td>
+                                    <td> @Html.DisplayFor(modelItem => item.Title)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Description)</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(item?.Image))
+                                        {
+                                            <a href="@item.Image" target="_blank" class="attachmnets"> <img src="@item.Image" style="height:100px; width:100px" /></a>
+                                        }
+                                        else
+                                        {
+                                            <span class="label label-success">
+                                                <i class="fa fa-News text-blue"></i>
+                                                No attachment
+                                            </span>
+                                        }
+                                    </td>
+                                    <td><a href="item.URL">@Html.DisplayFor(modelItem => item.URL)</a></td>
+                                    <td>@Html.DisplayFor(modelItem => item.PostedDate)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.ExpiresDate)</td>
+
+                                    <td>
+                                        <a title="DETAIL" class="detail" href="#" data-id="@item.Id">   <i class="fa fa-list text-primary"></i> </a> |
+                                        <a title="EDIT" class="edit" href="#" data-id="@item.Id">   <i class="fa fa-edit text-primary"></i> </a> |
+                                        <a title="DELETE" class="delete" href="#" data-id="@item.Id">   <i class="fa fa-remove text-red"></i>   </a>
+
+
+                                    </td>
+                                </tr>
+                            }
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="modal" class="modal fade" style="display:none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal_Title">    </h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <hr />
+
+            <div class="modal-body" id="modal_body">
+                <div class="overlay" id="loader">
+                    <i class="fa fa-refresh fa-spin fa-3x offset-sm-5"></i>
+
+                    <br /><br /><br />
+                </div>
+
+                <div id="innerModalbody">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Upload-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Company Contact Upload</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+            </div>
+            <div class="modal-body" id="UploadForm">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<script src="~/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+<script src="~/AdminLTE/plugins/datatables/jquery.dataTables.js"></script>
+<script src="~/AdminLTE/plugins/datatables/dataTables.bootstrap4.js"></script>
+<script src="~/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+<script src="~/AdminLTE/plugins/datatables/extensions/JsZip/jszip.min.js"></script>
+<script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+<script src="~/AdminLTE/plugins/sweetalert/sweetalert2.min.js"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+
+        var dataTable = $('#news').DataTable({
+            paging: true,
+            lengthChange: false,
+            autoWidth: false,
+            searching: true,
+            ordering: true,
+            info: true,
+            autoWidth: false,
+            iDisplayLength: 8,
+            columnDefs: [{ targets: [0], class: "wrapok" }]
+        });
+
+        $('#create_new').click(function () {
+            var url = "/Operational/SliderViewItems/Create";
+            $('#loader').show();
+            $.get(url, function (data) {
+                $('#modal_Title').html("New News");
+                $('#modal_body').empty();
+                $('#modal_body').html(data);
+                $('#loader').hide();
+                $('#modal').modal('show');
+            });
+        });
+
+        $('.edit').click(function () {
+            var url = "/Operational/SliderViewItems/Edit?id=" + $(this).attr('data-id');
+            $.get(url, function (data) {
+                $('#loader').show();
+                $('#modal_Title').html("Edit News");
+                $('#modal_body').empty();
+                $('#modal_body').html(data);
+                $('#modal').modal('show');
+            });
+        });
+
+        $('.detail').click(function () {
+            var url = "/Operational/SliderViewItems/Detail?id=" + $(this).attr('data-id');
+            $.get(url, function (data) {
+                $('#loader').show();
+                $('#modal_Title').html("Detail");
+                $('#modal_body').empty();
+                $('#modal_body').html(data);
+                $('#modal').modal('show');
+            });
+        });
+
+
+        $('.delete').click(function () {
+            var rowClicked = "#" + $(this).parents('tr').attr('id');
+            swal({
+                type: 'error',
+                title: 'Are you sure you want to delete this ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, delete it!'
+            }).then((result) => {
+                if (result.value) {
+                    var url = "/Operational/SliderViewItems/Delete?id=" + $(this).attr('data-id');
+                    $.get(url, function (result) {
+                        //alert(JSON.stringify(result))
+                        if (result.status == 3) {
+                            dataTable.row(rowClicked).remove().draw();
+                            swal({
+                                type: 'success',
+                                title: 'Record sucessfully deleted',//'Your work has been saved',
+                                showConfirmButton: false,
+                                timer: 3000
+                            });
+                        }
+                    });
+                }
+            });
+        });
+
+
+    });
+
+</script>

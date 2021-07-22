@@ -1,0 +1,301 @@
+﻿<link rel="stylesheet" href="~/AdminLTE/plugins/select2/select2.css">
+
+<style type="text/css">
+    /* Dropdown Button */
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+        /* Dropdown button on hover & focus */
+        .dropbtn:hover, .dropbtn:focus {
+            background-color: #3e8e41;
+        }
+
+    /* The search field */
+    /*#myInput {
+        border-box: box-sizing;
+        background-image: url('searchicon.png');
+        background-position: 14px 12px;
+        background-repeat: no-repeat;
+        font-size: 16px;
+        padding: 14px 20px 12px 45px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+    }*/
+
+    /* The search field when it gets focus/clicked on */
+    /*#myInput:focus {
+            outline: 3px solid #ddd;
+        }*/
+
+    /* The container <div> - needed to position the dropdown content */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    /* Dropdown Content (Hidden by Default) */
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f6f6f6;
+        min-width: 230px;
+        border: 1px solid #ddd;
+        z-index: 1;
+    }
+
+        /* Links inside the dropdown */
+        .dropdown-content a {
+            color: black;
+            padding: 12px;
+            text-decoration: none;
+            display: block;
+        }
+
+            /* Change color of dropdown links on hover */
+            .dropdown-content a:hover {
+                background-color: #60ac5d
+            }
+
+    /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+    .show {
+        display: block;
+    }
+</style>
+
+<!-- Header Navbar -->
+<nav class="main-header navbar navbar-expand bg-white navbar-light border-bottom">
+    <!-- Left navbar links -->
+
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars text-primary"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+            <a href="@Url.Action("LandingPage", "Home", new { area = "Account"})" class="nav-link">Home</a>
+        </li>
+        @*<li class="nav-item d-none d-sm-inline-block">
+            <a class="nav-link" data-widget="main-sidebar" data-slide="true" href="#">
+                <i class="fa fa-th-large text-primary"></i>
+            </a>
+        </li>*@
+    </ul>
+
+    <!-- SEARCH FORM -->
+    @*<form class="form-inline col-lg-4">
+            <div class="input-group input-group-sm col-md-10">
+                <div class="dropdown">
+                    <div id="myDropdown" class="dropdown-content">
+                        <input type="search" class="form-control form-control-navbar" placeholder="Search.." id="myInput" onkeyup="filterFunction()">
+                    </div>
+                </div>
+
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fa fa-search text-primary"></i>
+                    </button>
+                </div>
+            </div>
+        </form>*@
+    <!-- SEARCH FORM -->
+
+    <form class="form-inline ml-3">
+        <a class="nav-link" data-widget="main-sidebar" data-slide="true" href="#">
+            <i class="fa fa-th-large"></i>
+        </a>
+
+        <div class="input-group input-group-sm">
+            <div class="dropdown">
+                <div id="myDropdown" class="dropdown-content">
+                    <input class="form-control form-control-navbar" type="search" placeholder="Search" name="myInput" id="myInput" aria-label="Search" onkeyup="filterFunction()">
+                </div>
+            </div>
+            <div class="input-group-append">
+                @*<button class="btn btn-navbar" type="submit">
+                        <i class="fa fa-search"></i>
+                    </button>*@
+            </div>
+        </div>
+    </form>
+
+    <!-- Right navbar links -->
+    <ul class="navbar-nav ml-auto">
+
+        <!-- Signed On User -->
+        <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <span><i class="fa fa-user"></i></span>
+                <span> @Context.User.Identity.Name </span>
+            </a>
+            <ul class="dropdown-menu">
+                <!-- User image -->
+                <li class="user-header">
+                    <div style="position:relative;text-align:center">
+                        <span><i class="fa fa-user fa-5x"></i></span>
+                        <p>
+                            @Context.User.Identity.Name
+                        </p>
+                    </div>
+                </li>
+                <li class="user-footer">
+                    <div class="float-left">
+                        <a href="@Url.Action("ChangePassword", "Account", new { area = "Account"})" class="btn btn-block"><i class="fa fa-key"></i> Change Password</a>
+                    </div>
+                    <div class="float-left">
+                        <a href="@Url.Action("LogOff", "Account", new { area = "Account"})" class="btn btn-block"><i class="glyphicon glyphicon-log-out"></i> Sign out</a>
+                    </div>
+                </li>
+            </ul>
+        </li>
+
+        @*<!-- Messages Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fa fa-comments-o"></i>
+                <span class="badge badge-danger navbar-badge">3</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="~/AdminLTE/dist/img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Brad Diesel
+                                <span class="float-right text-sm text-danger"><i class="fa fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">Call me whenever you can...</p>
+                            <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="~/AdminLTE/dist/img/user8-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                John Pierce
+                                <span class="float-right text-sm text-muted"><i class="fa fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">I got your message bro</p>
+                            <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item">
+                    <!-- Message Start -->
+                    <div class="media">
+                        <img src="~/AdminLTE/dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+                        <div class="media-body">
+                            <h3 class="dropdown-item-title">
+                                Nora Silvester
+                                <span class="float-right text-sm text-warning"><i class="fa fa-star"></i></span>
+                            </h3>
+                            <p class="text-sm">The subject goes here</p>
+                            <p class="text-sm text-muted"><i class="fa fa-clock-o mr-1"></i> 4 Hours Ago</p>
+                        </div>
+                    </div>
+                    <!-- Message End -->
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="#" class="dropdown-item dropdown-footer">See All Messages</a>
+            </div>
+        </li>
+
+        <!-- Notifications Dropdown Menu -->
+        <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown" href="#">
+                <i class="fa fa-bell-o"></i>
+                <span class="badge badge-warning navbar-badge">15</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                <span class="dropdown-item dropdown-header">15 Notifications</span>
+                <div class="dropdown-divider"></div>
+                <a href="@Url.Action("Index", "Notification", new { area = "Account"})" class="dropdown-item">
+                    <i class="fa fa-envelope mr-2"></i> 4 new messages
+                    <span class="float-right text-muted text-sm">3 mins</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="@Url.Action("Index", "Notification", new { area = "Account"})" class="dropdown-item">
+                    <i class="fa fa-users mr-2"></i> 8 friend requests
+                    <span class="float-right text-muted text-sm">12 hours</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="@Url.Action("Index", "Notification", new { area = "Account"})" class="dropdown-item">
+                    <i class="fa fa-file mr-2"></i> 3 new reports
+                    <span class="float-right text-muted text-sm">2 days</span>
+                </a>
+                <div class="dropdown-divider"></div>
+                <a href="@Url.Action("Index", "Notification", new { area = "Account"})" class="dropdown-item dropdown-footer">See All Notifications</a>
+            </div>
+        </li>*@
+
+        <li class="nav-item">
+            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#">
+                <i class="fa fa-th-large text-primary"></i>
+            </a>
+        </li>
+    </ul>
+</nav>
+<!-- /.navbar -->
+<script src="~/AdminLTE/plugins/select2/select2.js"></script>
+
+<script type="text/javascript">
+
+
+
+    function filterFunction() {
+
+        var searchCriteria = $("#myInput").val();
+
+        //selectList.find("a:gt(0)").remove();
+        $("#myDropdown").find("a").remove();
+
+        var url = "/Account/Utility/GetMenuItem?searchCriteria=" + searchCriteria;
+
+        $.get(url, function (data) {
+
+            //console.log(data.menuItems);
+
+            if (data != null) {
+                var url = '';
+                jQuery.each(data.menuItems, function (index, action) {
+                    //console.log(action.uri);
+                    if (action.area != null && action.area != "")
+                        url = "/" + action.area + "/" + action.controllerName + "/" + action.actionMethod;
+                    else
+                        url = "/" + action.controllerName + "/" + action.actionMethod;
+
+                    $("#myDropdown").append("<a href='" + url + "'>" + action.displayText + "</a>");
+                });
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        document.getElementById("myDropdown").classList.toggle("show");
+        
+        //$("#myInput").focusout(function () {
+        //    $("#myDropdown").find("a").remove();
+        //    $("#myInput").val('');
+        //});
+
+        //$("#myInput").focusin(function () {
+        //    filterFunction();
+        //});
+
+        //$("#myInput").on('mousedown',function () {
+        //    alert('mousedown');
+        //});         
+    });
+</script>

@@ -1,0 +1,633 @@
+﻿@model Ground_Handlng.DataObjects.ViewModel.Manual.ManualsViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<style>
+    #loader, #exportTemplateloader {
+        color: #2e7c31;
+        text-shadow: 1px 1px 1px #ccc;
+    }
+    td {
+        white-space: nowrap;
+    }
+
+        td.wrapok {
+            white-space: normal;
+            word-wrap: break-word;
+            word-break: break-all;
+            white-space: normal;
+        }
+</style>
+
+    <link rel="stylesheet" href="~/AdminLTE/plugins/iCheck/square/blue.css">
+    <link href="~/AdminLTE/plugins/datatables/dataTables.bootstrap4.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/AdminLTE/plugins/datatables/extensions/Buttons/css/buttons.dataTables.min.css">
+    <link href="~/AdminLTE/plugins/sweetalert/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/AdminLTE/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet" />
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-10">
+                <h1> Manuals </h1>
+            </div>
+
+            <div class="col-sm-10" style="margin-top:2%">
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="callout bg-success">
+            <h3>Alert !</h3>
+            <h5>Please check the below instruction befor Uploading Sections</h5>
+
+                <div class="col-md-5">
+                    1. Make sure the file is in File.PDF format!
+                </div>
+                <div class="col-md-5">
+                    2. Make sure the  'Subject Filed' doesn't contain an '&amp;' and '?' character!
+                </div>
+                <div class="col-md-5">
+                    <a href="~/Manuals/000.000 Section Name.pdf" download class="text-white">
+                        <i class="fa fa-file-pdf"></i>3. Download Sample
+                    </a>
+                </div>
+                <div class="col-md-1">
+                </div>
+        </div>
+        <div class="card-header">
+            <div class="form-group row">
+
+                @*<h3 class="card-title col-sm-2">
+                    <a class="box-title" href="#" id="create_new_Book"> <i class="fa fa-plus text-primary"></i>  Create Book </a>
+                </h3>*@
+                @*<h3 class="card-title col-sm-2">
+                    <a class="box-title" href="#" id="create_new_Chapter"> <i class="fa fa-plus text-primary"></i>  Create Chapter </a>
+                </h3>
+                <h3 class="card-title col-sm-2">
+                    <a class="box-title" href="#" id="create_new"> <i class="fa fa-plus text-primary"></i>  Create Section </a>
+                </h3>*@
+            </div>
+
+            <div class="card-tools">
+
+            </div>
+        </div>
+
+        <div class="card-body">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title col-sm-2">
+                        <a class="box-title" href="#" id="create_new_Book"> <i class="fa fa-plus text-primary"></i>  Create Book </a>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="box-body table-responsive no-padding">
+                        <table id="manualBook" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Book Title
+                                    </th>
+                                    <th>
+                                        Sequence No
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.books)
+                                {
+                                    <tr class="odd" role="row" id="@item.Id">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.SequenceNo)
+                                        </td>
+                                        <td>
+                                            @if (item.Status == Ground_Handlng.DataObjects.Models.Others.RecordStatus.Active)
+                                            {
+                                                <span class="label label-success">
+                                                    Active
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-danger">
+                                                    In-active
+                                                </span>
+                                            }
+                                            @*@Html.DisplayFor(modelItem => item.Status)*@
+                                        </td>
+                                        <td>
+                                            <span style="white-space : nowrap">
+                                                <a title="ADD Chapter" class="addChapter" href="#" data-id="@item.Id">   <i class="fa fa-plus text-primary"></i> </a> |
+                                                <a title="EDIT" class="editBook" href="#" data-id="@item.Id">   <i class="fa fa-edit text-primary"></i> </a> |
+                                                <a title="DELETE" class="deleteBook" href="#" data-id="@item.Id">   <i class="fa fa-remove text-red"></i>   </a>
+                                                @*|<a title="VIEW" class="viewChapters" href="#" data-id="@item.Id">   <i class="fa fa-eye text-primary"></i> </a>*@
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title col-sm-2">
+                        <a class="box-title" href="#" id="create_new_Chapter"> <i class="fa fa-plus text-primary"></i>  Create Chapter </a>
+                    </h3>
+                </div>
+                <div class="card-body">
+
+                    <div class="box-body table-responsive no-padding">
+                        <table id="manualChapter" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Chapter Title
+                                    </th>
+                                    <th>
+                                        Chapter Number
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.bookChapters)
+                                {
+                                    <tr class="odd" role="row" id="@item.Id">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookChapterTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookChapterNumber)
+                                        </td>
+                                        <td>
+                                            @if (item.Status == Ground_Handlng.DataObjects.Models.Others.RecordStatus.Active)
+                                            {
+                                                <span class="label label-success">
+                                                    Active
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-danger">
+                                                    In-active
+                                                </span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <span style="white-space : nowrap">
+                                                <a title="ADD SECTION" class="addSectionChapter" href="#" data-id="@item.Id">   <i class="fa fa-plus text-primary"></i> </a>|
+                                                <a title="EDIT" class="editChapter" href="#" data-id="@item.Id">   <i class="fa fa-edit text-primary"></i> </a> |
+                                                <a title="DELETE" class="deleteChapter" href="#" data-id="@item.Id">   <i class="fa fa-remove text-red"></i>   </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title col-sm-2">
+                        <a class="box-title" href="#" id="create_new"> <i class="fa fa-plus text-primary"></i>  Create Section </a>
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="box-body table-responsive no-padding">
+                        <table id="manual" class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Book Title
+                                    </th>
+                                    <th>
+                                        Sequence No
+                                    </th>
+                                    <th>
+                                        Chapter Title
+                                    </th>
+                                    <th>
+                                        Chapter Number
+                                    </th>
+                                    <th>
+                                        Section Title
+                                    </th>
+                                    <th>
+                                        Section Number
+                                    </th>
+                                    <th>
+                                        Book Url
+                                    </th>
+                                    <th>
+                                        Status
+                                    </th>
+
+                                    <th>
+                                        Actions
+                                    </th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @foreach (var item in Model.bookChapterSections)
+                                {
+                                    <tr class="odd" role="row" id="@item.Id">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookChapters.Book.BookTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookChapters.Book.SequenceNo)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookChapters.BookChapterNumber)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookChapters.BookChapterTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookSectionTitle)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.BookSectionNumber)
+                                        </td>
+                                        <td>
+                                            <div class="wrapok">
+                                                <a href="@item.BookUrl">@Html.DisplayFor(modelItem => item.BookChapters.Book.BookTitle)</a>
+                                            </div>
+
+                                        </td>
+                                        <td>
+                                            @if (item.Status == Ground_Handlng.DataObjects.Models.Others.RecordStatus.Active)
+                                            {
+                                                <span class="label label-success">
+                                                    Active
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span class="label label-danger">
+                                                    In-active
+                                                </span>
+                                            }
+                                            @*@Html.DisplayFor(modelItem => item.Status)*@
+                                        </td>
+                                        <td>
+                                            <span style="white-space : nowrap">
+                                                <a title="EDIT" class="edit" href="#" data-id="@item.Id">   <i class="fa fa-upload text-primary"></i> </a> |
+                                                <a title="RENAME" class="rename" href="#" data-id="@item.Id">   <i class="fa fa-edit text-primary"></i> </a> |
+                                                <a title="DELETE" class="delete" href="#" data-id="@item.Id">   <i class="fa fa-remove text-red"></i>   </a> |
+                                                <a title="VIEW" class="view" href="#" data-id="@item.Id">   <i class="fa fa-eye text-primary"></i> </a>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div><!-- /.box-body -->
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+</section>
+
+<div id="modal" class="modal fade" style="display:none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal_Title">    </h4>
+                <button type="button" class="close" data-dismiss="modal">×</button>
+            </div>
+
+            <hr />
+
+            <div class="modal-body" id="modal_body">
+                <div class="overlay" id="loader">
+                    <i class="fa fa-refresh fa-spin fa-3x offset-sm-5"></i>
+
+                    <br /><br /><br />
+                </div>
+
+                <div id="innerModalbody">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+    <script type="text/javascript" src="~/AdminLTE/plugins/daterangepicker/moment.js"></script>
+    <script type="text/javascript" src="~/AdminLTE/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/AdminLTE/plugins/iCheck/icheck.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/dataTables.bootstrap4.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables/extensions/JsZip/jszip.min.js"></script>
+    <script src="~/AdminLTE/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/AdminLTE/plugins/sweetalert/sweetalert2.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+
+            var dataTable = $('#manual').DataTable({
+                dom: 'Bfrtip',
+        buttons: [
+             'excel'
+        ],
+                paging: true,
+                lengthChange: false,
+                autoWidth: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                iDisplayLength: 8,
+                columnDefs: [{ targets: [0], class: "wrapok" }]
+            });
+            var bookDatatable = $('#manualBook').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ],
+                paging: true,
+                lengthChange: false,
+                autoWidth: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                iDisplayLength: 8,
+                columnDefs: [{ targets: [0], class: "wrapok" }]
+            });
+            var bookchapterDatatable = $('#manualChapter').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'excel'
+                ],
+                paging: true,
+                lengthChange: false,
+                autoWidth: false,
+                searching: true,
+                ordering: true,
+                info: true,
+                autoWidth: false,
+                iDisplayLength: 8,
+                columnDefs: [{ targets: [0], class: "wrapok" }]
+            });
+
+            $('input').iCheck({
+                checkboxClass: 'icheckbox_square-blue',
+                radioClass: 'iradio_square-blue',
+                increaseArea: '20%' // optional
+            });
+
+              @{
+               @if (ViewBag.SuccessMessage != null)
+               {
+                <text>
+            swal({
+                type: 'success',
+                title: '@ViewBag.SuccessMessage',//'Your work has been saved',
+                showConfirmButton: false,
+                timer: 3000
+            });
+                </text>
+               }
+            }
+
+            $('#create_new').click(function () {
+                var url = "/Operational/Manuals/Create";
+                $('#loader').show();
+                $.get(url, function (data) {
+                    $('#modal_Title').html("New Book");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#loader').hide();
+                    $('#modal').modal('show');
+                });
+            });
+            $('#create_new_Book').click(function () {
+                var url = "/Operational/Manuals/CreateBook";
+                $('#loader').show();
+                $.get(url, function (data) {
+                    $('#modal_Title').html("New Book");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#loader').hide();
+                    $('#modal').modal('show');
+                });
+            });
+            $('#create_new_Chapter').click(function () {
+                var url = "/Operational/Manuals/CreateChapter";
+                $('#loader').show();
+                $.get(url, function (data) {
+                    $('#modal_Title').html("New Book Chapter");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#loader').hide();
+                    $('#modal').modal('show');
+                });
+            });
+             $('.edit').click(function () {
+                 var url = "/Operational/Manuals/Edit?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("Edit Book");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+             });
+            $('.addChapter').click(function () {
+                var url = "/Operational/Manuals/AddChapter?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("Add Book Chapter");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+            });
+            $('.addSectionChapter').click(function () {
+                var url = "/Operational/Manuals/AddSection?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("Edit Book Section");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+            });
+            $('.rename').click(function () {
+                var url = "/Operational/Manuals/Rename?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("Rename");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+            });
+            $('.editBook').click(function () {
+                var url = "/Operational/Manuals/EditBook?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("Rename Book");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+            });
+            $('.editChapter').click(function () {
+                var url = "/Operational/Manuals/EditChapter?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("Rename Chapter");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+            });
+            $('.view').click(function () {
+                var url = "/Operational/Manuals/View?id=" + $(this).attr('data-id');
+                $.get(url, function (data) {
+                    $('#loader').show();
+                    $('#modal_Title').html("View Version History");
+                    $('#modal_body').empty();
+                    $('#modal_body').html(data);
+                    $('#modal').modal('show');
+                });
+            });
+            $('.delete').click(function () {
+                var rowClicked = "#" + $(this).parents('tr').attr('id');
+                swal({
+                    type: 'error',
+                    title: 'Are you sure you want to delete this ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        var url = "/Operational/Manuals/Delete?id=" + $(this).attr('data-id');
+                        $.get(url, function (result) {
+                            //alert(JSON.stringify(result))
+                            if (result.status == 3) {
+                                debugger;
+                                dataTable.row(rowClicked).remove().draw();
+                                swal({
+                type: 'success',
+                title: 'Record sucessfully deleted',//'Your work has been saved',
+                showConfirmButton: false,
+                timer: 3000
+                });
+                            }
+                        });
+                    }
+                });
+            });
+            $('.deleteChapter').click(function () {
+                var rowClicked = "#" + $(this).parents('tr').attr('id');
+                swal({
+                    type: 'error',
+                    title: 'Are you sure you want to delete this ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        var url = "/Operational/Manuals/DeleteChapter?id=" + $(this).attr('data-id');
+                        $.get(url, function (result) {
+                            //alert(JSON.stringify(result))
+                            if (result.status == 3) {
+                                debugger;
+                                bookchapterDatatable.row(rowClicked).remove().draw();
+                                swal({
+                                    type: 'success',
+                                    title: 'Record sucessfully deleted',//'Your work has been saved',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+            $('.deleteBook').click(function () {
+                var rowClicked = "#" + $(this).parents('tr').attr('id');
+                swal({
+                    type: 'error',
+                    title: 'Are you sure you want to delete this ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.value) {
+                        var url = "/Operational/Manuals/DeleteBook?id=" + $(this).attr('data-id');
+                        $.get(url, function (result) {
+                            //alert(JSON.stringify(result))
+                            if (result.status == 3) {
+                                debugger;
+                                bookDatatable.row(rowClicked).remove().draw();
+                                swal({
+                                    type: 'success',
+                                    title: 'Record sucessfully deleted',//'Your work has been saved',
+                                    showConfirmButton: false,
+                                    timer: 3000
+                                });
+                            }
+                        });
+                    }
+                });
+            });
+
+        });
+    </script>
+
+
